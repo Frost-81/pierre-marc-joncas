@@ -82,7 +82,12 @@
 *, *::before, *::after { box-sizing: border-box; }
 * { margin: 0; }
 
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 1.5rem; }
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 1.5rem;
+  overflow-x: hidden;
+}
 
 body {
   background: var(--bg);
@@ -132,7 +137,7 @@ footer > section {
   display: grid;
   grid-template-columns:
     [full-start] minmax(var(--gutter), 1fr)
-    [content-start] min(var(--maxw), 100%) [content-end]
+    [content-start] min(var(--maxw), 100% - 2 * var(--gutter)) [content-end]
     minmax(var(--gutter), 1fr) [full-end];
   padding-block: var(--sp-sec);
   row-gap: clamp(2rem, 4vw, 3.25rem);
@@ -522,7 +527,7 @@ footer > section { padding-block: clamp(1.75rem, 3.5vw, 2.5rem); row-gap: 1.25re
   .foot-bar {
     grid-template-columns:
       [full-start] minmax(var(--gutter), 1fr)
-      [content-start] auto 1fr auto [content-end]
+      [content-start] auto minmax(0, 1fr) auto [content-end]
       minmax(var(--gutter), 1fr) [full-end];
     column-gap: clamp(1.5rem, 3vw, 2.5rem);
     row-gap: 0;
@@ -676,9 +681,15 @@ footer > section { padding-block: clamp(1.75rem, 3.5vw, 2.5rem); row-gap: 1.25re
   .burger[aria-expanded="true"] span { background: transparent; }
   .burger[aria-expanded="true"] span::before { translate: 0; rotate: 45deg; }
   .burger[aria-expanded="true"] span::after  { translate: 0; rotate: -45deg; }
+  .burger { position: relative; }
   .burger em { font-style: normal; }
 
-  header > nav { flex-wrap: wrap; }
+  header > nav { flex-wrap: wrap; gap: .6rem; }
+
+  /* La signature sous le nom est la plus large du bloc : on la retire
+     sur mobile pour que marque + menu + thème tiennent sur une ligne. */
+  .brand i { display: none; }
+  .brand .mark { width: 34px; height: 34px; }
   #menu {
     order: 3;
     width: 100%;
@@ -717,6 +728,20 @@ footer > section { padding-block: clamp(1.75rem, 3.5vw, 2.5rem); row-gap: 1.25re
 
   /* Le bandeau se place au-dessus de la barre de réservation */
   .consent { bottom: calc(5rem + env(safe-area-inset-bottom)); }
+}
+
+@media (max-width: 560px) {
+  .burger { padding: .6rem .8rem; }
+  .burger em {
+    position: absolute; width: 1px; height: 1px;
+    margin: -1px; padding: 0; overflow: hidden;
+    clip-path: inset(50%); white-space: nowrap;
+  }
+
+  /* Tableau de la politique : lisible sans debordement */
+  .legal table { font-size: var(--fs-xs); }
+  .legal th, .legal td { padding: .6rem .5rem .6rem 0; }
+  .legal code { word-break: break-all; }
 }
 
 @media (max-width: 520px) {

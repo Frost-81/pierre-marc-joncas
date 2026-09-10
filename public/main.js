@@ -43,7 +43,17 @@
     });
   }
 
-  /* ---- 3. Apparition progressive ------------------------- */
+  /* ---- 3. Filet de l'en-tete au defilement ---------------- */
+  var header = document.querySelector("header");
+  if (header) {
+    var onScroll = function () {
+      header.classList.toggle("is-stuck", window.scrollY > 8);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+
+  /* ---- 4. Apparition progressive ------------------------- */
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   if (!reduced && "IntersectionObserver" in window) {
@@ -66,7 +76,7 @@
     });
   }
 
-  /* ---- 4. Année courante --------------------------------- */
+  /* ---- 5. Année courante --------------------------------- */
   var year = document.querySelector("[data-year]");
   if (year) year.textContent = new Date().getFullYear();
 })();

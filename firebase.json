@@ -6,8 +6,16 @@
     "trailingSlash": false,
     "headers": [
       {
-        "source": "**/*.@(css|js)",
-        "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600" }]
+        "source": "**/*.@(html|css|js)",
+        "headers": [{ "key": "Cache-Control", "value": "no-cache, must-revalidate" }]
+      },
+      {
+        "source": "/",
+        "headers": [{ "key": "Cache-Control", "value": "no-cache, must-revalidate" }]
+      },
+      {
+        "source": "/politique-confidentialite",
+        "headers": [{ "key": "Cache-Control", "value": "no-cache, must-revalidate" }]
       },
       {
         "source": "**/*.@(jpg|jpeg|png|gif|webp|avif|svg|woff2)",

@@ -85,8 +85,7 @@
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
-  scroll-padding-top: 1.5rem;
-  overflow-x: hidden;
+  scroll-padding-top: 6rem;
 }
 
 body {
@@ -96,7 +95,6 @@ body {
   font-size: var(--fs-md);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
 
 h1, h2, h3 {
@@ -133,7 +131,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 /* ---------- 3. LAYOUT PRIMITIVES -------------------------- */
 /* Chaque <section> est sa propre grille : gouttière | contenu | gouttière */
 main > section,
-footer > section {
+body > footer > section {
   display: grid;
   grid-template-columns:
     [full-start] minmax(var(--gutter), 1fr)
@@ -143,7 +141,7 @@ footer > section {
   row-gap: clamp(2rem, 4vw, 3.25rem);
 }
 main > section > *,
-footer > section > * { grid-column: content; }
+body > footer > section > * { grid-column: content; }
 
 /* En-tête de section */
 .sec-head { max-width: 46ch; display: grid; gap: .9rem; }
@@ -206,18 +204,25 @@ footer > section > * { grid-column: content; }
 .brand i { font-style: normal; font-weight: 500; font-size: var(--fs-xs); color: var(--muted); letter-spacing: 0; }
 
 /* ---------- 5. HEADER / NAV ------------------------------- */
-header {
-  position: relative; z-index: 50;
-  background: var(--bg);
-  border-bottom: 1px solid var(--line);
+body > header {
+  position: sticky; top: 0; z-index: 50;
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(14px) saturate(140%);
+  border-bottom: 1px solid transparent;
+  transition: border-color .25s ease, box-shadow .25s ease;
+}
+/* Le filet et l'ombre n'apparaissent qu'une fois la page defilee */
+body > header.is-stuck {
+  border-bottom-color: var(--line);
+  box-shadow: 0 8px 24px -20px rgba(22,19,15,.5);
 }
 
-header > nav {
+body > header > nav {
   max-width: var(--maxw); margin-inline: auto;
   padding: .85rem var(--gutter);
   display: flex; align-items: center; gap: 1rem;
 }
-header > nav > #menu {
+body > header > nav > #menu {
   margin-inline: auto 0;
   display: flex; align-items: center; gap: clamp(.5rem, 1.6vw, 1.6rem);
 }
@@ -360,7 +365,7 @@ header > nav > #menu {
     align-items: start;
   }
   .offre-detail { grid-column: 2 / 3; }
-  .prix { grid-column: 4 / 5; position: sticky; top: 2rem; }
+  .prix { grid-column: 4 / 5; position: sticky; top: 6.5rem; }
 }
 
 .offre-detail { display: grid; gap: 1rem; align-content: start; }
@@ -516,44 +521,14 @@ header > nav > #menu {
 .finale .actions { margin-top: .75rem; }
 .finale-note { font-size: var(--fs-xs) !important; letter-spacing: .04em; }
 
-/* ---------- 14. FOOTER (barre horizontale) ---------------- */
-footer { border-top: 1px solid var(--line); }
-footer > section { padding-block: clamp(1.75rem, 3.5vw, 2.5rem); row-gap: 1.25rem; }
-
-.foot-bar { align-items: center; }
-.foot-bar > * { grid-column: content; }
-
-@media (min-width: 1000px) {
-  .foot-bar {
-    grid-template-columns:
-      [full-start] minmax(var(--gutter), 1fr)
-      [content-start] auto minmax(0, 1fr) auto [content-end]
-      minmax(var(--gutter), 1fr) [full-end];
-    column-gap: clamp(1.5rem, 3vw, 2.5rem);
-    row-gap: 0;
-  }
-  .foot-bar .brand { grid-column: 2 / 3; }
-  .foot-bar nav    { grid-column: 3 / 4; justify-self: center; }
-  .foot-cta        { grid-column: 4 / 5; justify-self: end; }
-}
-
-.foot-bar nav ul {
-  display: flex; flex-wrap: wrap; align-items: center;
-  gap: .5rem clamp(.9rem, 2vw, 1.6rem);
-}
-.foot-bar nav a {
-  font-size: var(--fs-sm); color: var(--muted);
-  transition: color .18s ease;
-}
-.foot-bar nav a:hover { color: var(--gold); }
-.foot-cta { margin: 0; }
+/* ---------- 14. FOOTER ------------------------------------ */
+body > footer { border-top: 1px solid var(--line); }
 
 .copy {
   display: flex; flex-wrap: wrap; gap: .5rem 1.5rem;
   justify-content: space-between; align-items: center;
   max-width: var(--maxw); margin-inline: auto;
-  padding: 1.25rem var(--gutter) clamp(1.5rem, 3vw, 2.25rem);
-  border-top: 1px solid var(--line);
+  padding: clamp(1.25rem, 2.5vw, 1.75rem) var(--gutter);
   color: var(--muted); font-size: var(--fs-xs);
 }
 
@@ -623,10 +598,10 @@ footer > section { padding-block: clamp(1.75rem, 3.5vw, 2.5rem); row-gap: 1.25re
 /* ---------- 16. CONSENTEMENT (Loi 25) --------------------- */
 .consent {
   position: fixed; z-index: 60;
-  inset: auto auto clamp(1rem, 3vw, 1.75rem) clamp(1rem, 3vw, 1.75rem);
-  width: min(26rem, calc(100vw - 2 * clamp(1rem, 3vw, 1.75rem)));
-  display: grid; gap: .8rem;
-  padding: clamp(1.25rem, 2.2vw, 1.6rem);
+  inset: auto auto clamp(.75rem, 1.5vw, 1.15rem) clamp(.75rem, 1.5vw, 1.15rem);
+  width: min(23rem, calc(100vw - 1.5rem));
+  display: grid; gap: .55rem;
+  padding: 1rem 1.15rem;
   background: var(--surface);
   border: 1px solid var(--line-strong);
   border-radius: var(--r-lg);
@@ -635,11 +610,28 @@ footer > section { padding-block: clamp(1.75rem, 3.5vw, 2.5rem); row-gap: 1.25re
   transition: opacity .3s ease, translate .3s ease;
 }
 .consent.is-in { opacity: 1; translate: 0 0; }
-.consent h2 { font-size: var(--fs-h3); }
-.consent p { color: var(--muted); font-size: var(--fs-sm); line-height: 1.6; }
+.consent h2 { font-size: var(--fs-md); letter-spacing: -.02em; }
+.consent p { color: var(--muted); font-size: var(--fs-xs); line-height: 1.5; }
 
-.consent-actions { display: flex; flex-wrap: wrap; gap: .6rem; }
-.consent-actions .btn { flex: 1 1 8rem; padding: .8rem 1.1rem; }
+.consent-actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+.consent-actions .btn { flex: 1 1 7rem; padding: .6rem .9rem; font-size: var(--fs-xs); }
+
+/* Sur grand ecran : barre basse horizontale, texte a gauche, boutons a droite */
+@media (min-width: 760px) {
+  .consent {
+    width: min(42rem, calc(100vw - 3rem));
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 1.5rem;
+    row-gap: .35rem;
+    padding: .95rem 1.25rem;
+  }
+  .consent h2                 { grid-column: 1; grid-row: 1; }
+  .consent > #consent-texte   { grid-column: 1; grid-row: 2; }
+  .consent > .consent-links   { grid-column: 1; grid-row: 3; }
+  .consent > .consent-actions { grid-column: 2; grid-row: 1 / span 3; align-self: center; }
+  .consent > .consent-actions .btn { flex: 0 0 auto; }
+}
 
 .consent-links a {
   font-size: var(--fs-xs); color: var(--muted);
@@ -684,7 +676,7 @@ footer > section { padding-block: clamp(1.75rem, 3.5vw, 2.5rem); row-gap: 1.25re
   .burger { position: relative; }
   .burger em { font-style: normal; }
 
-  header > nav { flex-wrap: wrap; gap: .6rem; }
+  body > header > nav { flex-wrap: wrap; gap: .6rem; }
 
   /* La signature sous le nom est la plus large du bloc : on la retire
      sur mobile pour que marque + menu + thème tiennent sur une ligne. */
@@ -768,6 +760,6 @@ footer > section { padding-block: clamp(1.75rem, 3.5vw, 2.5rem); row-gap: 1.25re
 }
 
 @media print {
-  header, .dock, .theme, .skip, .consent, .copy-legal { display: none !important; }
+  body > header, .dock, .theme, .skip, .consent, .copy-legal { display: none !important; }
   body { background: #fff; color: #000; }
 }

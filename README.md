@@ -64,8 +64,11 @@ window.addEventListener("pmj:consent", function (e) {
 });
 ```
 
-**À faire compléter par un humain** — les mentions `[À COMPLÉTER : …]` sont surlignées en jaune
-dans `politique-confidentialite.html` : courriel de contact, adresse postale, durée de conservation.
+**Statut** — la politique est complète, sans mention à compléter. Coordonnées du responsable :
+téléphone et courriel (l'adresse postale a été retirée à la demande du client). Conservation :
+aucun dossier client n'est tenu; seules subsistent les traces des outils utilisés (Calendly,
+messagerie, journaux d'hébergement), supprimées au plus tard 12 mois après le dernier contact.
+Ce fichier n'est pas un avis juridique : faire relire la politique par une personne qualifiée.
 Le site est fonctionnellement conforme, mais la politique doit être relue par une personne qualifiée :
 ce fichier n'est pas un avis juridique.
 

@@ -31,7 +31,7 @@ npx firebase-tools deploy --only hosting
 
 ## Parcours de conversion
 
-Chaque section pousse vers une seule action : réserver 1 h 30.
+Chaque section pousse vers une seule action : réserver 30 min.
 
 1. **Héros** — promesse, format, preuve sociale (5,0 ★ · 17 avis) + double CTA
 2. **Thèmes** — les six terrains (couple, entreprise, finances, confiance, décision, changement)

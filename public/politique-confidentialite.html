@@ -105,7 +105,7 @@
       </p>
 
       <h2>5. Témoins (cookies) et stockage local</h2>
-      <p>Ce site ne dépose aucun témoin publicitaire ni traceur tiers. Voici l’intégralité de ce qui est enregistré dans votre navigateur :</p>
+      <p>Ce site ne dépose aucun témoin publicitaire. Voici l’intégralité de ce qui peut être enregistré dans votre navigateur :</p>
 
       <table>
         <caption>Stockage utilisé par ce site</caption>
@@ -115,12 +115,14 @@
         <tbody>
           <tr><td><code>pmj-consent</code></td><td>Mémoriser votre choix de consentement</td><td>Nécessaire</td><td>12 mois</td></tr>
           <tr><td><code>pmj-theme</code></td><td>Mémoriser l’affichage clair ou sombre</td><td>Nécessaire</td><td>Jusqu’à effacement</td></tr>
+          <tr><td><code>_ga</code>, <code>_ga_*</code></td><td>Mesurer la fréquentation du site (Google Analytics)</td><td>Avec votre consentement seulement</td><td>Jusqu’à 13 mois</td></tr>
         </tbody>
       </table>
 
       <p>
-        Ces éléments restent dans votre navigateur, ne contiennent aucune donnée identifiante et ne me sont
-        jamais transmis. Vous pouvez les effacer à tout moment via les réglages de votre navigateur.
+        Les deux premiers éléments restent dans votre navigateur, ne contiennent aucune donnée identifiante et ne
+        me sont jamais transmis. Les témoins Google Analytics ne sont déposés que si vous acceptez la mesure
+        d’audience, et sont supprimés si vous retirez votre consentement. Vous pouvez les effacer à tout moment via les réglages de votre navigateur.
       </p>
 
       <h2>6. Tiers et communication hors Québec</h2>
@@ -128,6 +130,7 @@
       <ul>
         <li><strong>Firebase Hosting (Google LLC, États-Unis)</strong> — hébergement du site et journaux de connexion.</li>
         <li><strong>Google Fonts (Google LLC, États-Unis)</strong> — chargement des polices de caractères; votre adresse IP est transmise à Google lors de l’affichage de la page.</li>
+        <li><strong>Google Analytics (Google LLC, États-Unis)</strong> — mesure de fréquentation du site, uniquement si vous l’acceptez.</li>
         <li><strong>Calendly LLC (États-Unis)</strong> — prise de rendez-vous, si vous utilisez ce canal.</li>
         <li><strong>Meta Platforms (États-Unis)</strong> — uniquement si vous choisissez de m’écrire par Messenger.</li>
       </ul>
@@ -215,6 +218,6 @@
 </aside>
 
 <script src="/main.js?v=2" defer></script>
-<script src="/consent.js?v=2" defer></script>
+<script src="/consent.js?v=3" defer></script>
 </body>
 </html>

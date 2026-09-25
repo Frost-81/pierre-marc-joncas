@@ -48,8 +48,30 @@
     });
   }
 
+  /* ---- Mesure d'audience (Google Analytics) --------------
+     Le script gtag.js n'est injecté qu'après acceptation. */
+  var GA_ID = "G-943TMPTCZK";
+  var gaCharge = false;
+
+  function appliquerMesure(choix) {
+    window["ga-disable-" + GA_ID] = choix !== "all";
+    if (choix !== "all" || gaCharge) return;
+    gaCharge = true;
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag("js", new Date());
+    window.gtag("config", GA_ID);
+
+    var script = document.createElement("script");
+    script.async = true;
+    script.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+    document.head.appendChild(script);
+  }
+
   /* ---- Diffusion de l'état ------------------------------- */
   function diffuser(choix) {
+    appliquerMesure(choix);
     window.dispatchEvent(new CustomEvent("pmj:consent", { detail: { choix: choix } }));
   }
 

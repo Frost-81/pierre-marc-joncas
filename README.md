@@ -12,6 +12,8 @@ public/
   main.js         Menu mobile, thème clair/sombre, apparitions au défilement, année du footer
   consent.js      Bandeau de consentement Loi 25 + passerelle pour un futur outil de mesure
   politique-confidentialite.html   Politique de confidentialité (Loi 25)
+  sitemap.xml     Plan du site pour Google Search Console
+  robots.txt      Autorise l'exploration et indique le sitemap
   assets/         Favicon + images
 firebase.json     Configuration Firebase Hosting
 .firebaserc       Projet Firebase : pierre-marc-joncas
@@ -80,8 +82,12 @@ ce fichier n'est pas un avis juridique.
   en 1200 × 630 donnerait un meilleur aperçu de lien sur Messenger et Facebook.
 - **Lien Messenger** : `https://m.me/pierremarcjoncas` est une supposition — à confirmer et corriger
   dans le footer (`public/index.html`).
-- **Domaine** : les balises `canonical` et `og:url` pointent vers `https://pierremarcjoncas.com/` — ajuster
-  si le domaine final diffère.
+- **Domaine** : `pierremarcjoncas.com` est le domaine principal; `pierremarcjoncas.ca` y redirige (301).
+  Les balises `canonical` et `og:url`, `sitemap.xml` et `robots.txt` pointent tous vers le `.com`.
+- **Sitemap** : `public/sitemap.xml` est soumis dans Google Search Console. Mettre à jour `<lastmod>`
+  quand le contenu d'une page change, et ajouter une entrée pour toute nouvelle page.
+- **Zones desservies** : Québec, Sainte-Foy, Sillery, Limoilou, Charlesbourg, Beauport, Lévis — listées
+  dans le JSON-LD (`areaServed`) et en partie dans le texte. À garder cohérent avec la fiche Google Business.
 - **Google Fonts** : les polices sont chargées depuis les serveurs de Google, ce qui transmet l'adresse IP
   du visiteur à un tiers hors Québec. C'est déclaré dans la politique; pour l'éviter complètement,
   héberger les fichiers `.woff2` dans `public/assets/` et remplacer le `<link>` par un `@font-face`.

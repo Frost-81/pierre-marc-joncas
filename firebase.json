@@ -18,6 +18,10 @@
         "headers": [{ "key": "Cache-Control", "value": "no-cache, must-revalidate" }]
       },
       {
+        "source": "/@(sitemap.xml|robots.txt)",
+        "headers": [{ "key": "Cache-Control", "value": "no-cache, must-revalidate" }]
+      },
+      {
         "source": "**/*.@(jpg|jpeg|png|gif|webp|avif|svg|woff2)",
         "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }]
       },

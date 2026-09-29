@@ -50,7 +50,7 @@
 
   /* ---- Mesure d'audience (Google Analytics) --------------
      Le script gtag.js n'est injecté qu'après acceptation. */
-  var GA_ID = "G-943TMPTCZK";
+  var GA_ID = "G-1TE5VWKNKT";
   var gaCharge = false;
 
   function appliquerMesure(choix) {
